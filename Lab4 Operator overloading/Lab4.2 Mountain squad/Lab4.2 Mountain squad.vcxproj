@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{A94D43FD-9EC4-4A33-AB5D-C9DFB143F756}</ProjectGuid>
+    <ProjectGuid>{EB338002-FCCB-4153-9704-FEEB878E6545}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>Lab41Matrix</RootNamespace>
+    <RootNamespace>Lab42Mountainsquad</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
