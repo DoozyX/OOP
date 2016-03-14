@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{D7D86D30-B7A5-4147-B248-D6CAEDEB8EC0}</ProjectGuid>
+    <ProjectGuid>{56C7D7C2-73E2-4A37-BE0C-9C97C30CAF66}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>Lab42Automobile</RootNamespace>
+    <RootNamespace>Lab41Matrix</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -146,6 +146,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
