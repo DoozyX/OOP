@@ -11,7 +11,7 @@ private:
 public:
 	MSquad() {};
 	MSquad(const char *name, int tours, int members) {
-		int size = strlen(name)+1;
+		int size = strlen(name) + 1;
 		this->name = new char[size];
 		strcpy_s(this->name, size, name);
 		this->tours = tours;
@@ -29,7 +29,8 @@ public:
 			int size = strlen(name) + 1;
 			t.name = new char[size];
 			strcpy_s(t.name, size, name);
-		}else {
+		}
+		else {
 			t.tours = ms.tours;
 			int size = strlen(ms.name) + 1;
 			t.name = new char[size];
@@ -49,10 +50,12 @@ public:
 		}
 		return false;
 	}
-	~MSquad() {};
+	~MSquad() {
+		//delete[] name;
+	};
 };
 
-void mostMemebers(MSquad *ms, int n){
+void mostMemebers(MSquad *ms, int n) {
 	MSquad max;
 	max = ms[0];
 	for (int i = 1; i < n; i++) {
