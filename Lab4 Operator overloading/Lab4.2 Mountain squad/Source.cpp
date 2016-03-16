@@ -9,7 +9,11 @@ private:
 	int tours;
 	int members;
 public:
-	MSquad() {};
+	MSquad() {
+		tours = 0;
+		members = 0;
+		name = new char[0];
+	};
 	MSquad(const char *name, int tours, int members) {
 		int size = strlen(name) + 1;
 		this->name = new char[size];
@@ -17,18 +21,33 @@ public:
 		this->tours = tours;
 		this->members = members;
 	}
+	MSquad(const MSquad &ms) {
+		int size = strlen(ms.name) + 1;
+		name = new char[size];
+		strcpy_s(name, size, name);
+		tours = ms.tours;
+		members = ms.members;
+	}
 	friend ostream &operator<<(ostream &output, const MSquad &ms) {
 		output << "Ime: " << ms.name << " Turi: " << ms.tours << " Clenovi: " << ms.members << endl;
 		return output;
 	}
-	MSquad &operator+(const MSquad &ms) {
+	MSquad &operator=(const MSquad &ms) {
+		int size = strlen(ms.name) + 1;
+		name = new char[size];
+		strcpy_s(name, size, name);
+		tours = ms.tours;
+		members = ms.members;
+		return *this;
+	}
+	MSquad operator+(const MSquad &ms) {
 		MSquad t;
 		t.members = members + ms.members;
 		if (members > ms.members) {
 			t.tours = tours;
 			int size = strlen(name) + 1;
 			t.name = new char[size];
-			strcpy_s(t.name, size, name);
+			strcpy_s(t.name, size, ms.name);
 		}
 		else {
 			t.tours = ms.tours;
@@ -51,8 +70,8 @@ public:
 		return false;
 	}
 	~MSquad() {
-		//delete[] name;
-	};
+		delete[] name;
+	}
 };
 
 void mostMemebers(MSquad *ms, int n) {
