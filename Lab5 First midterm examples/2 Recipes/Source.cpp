@@ -10,16 +10,16 @@ private:
 	char *contents;
 	void cpy(const Recipe &r) {
 		this->ingredients = r.ingredients;
-		strcpy_s(this->name, 100, r.name);
+		strcpy(this->name, r.name);
 		this->contents = new char[strlen(r.contents) + 1];
-		strcpy_s(this->contents, strlen(contents), r.contents);
+		strcpy(this->contents, r.contents);
 	}
 public:
-	Recipe(int ingredients = 0, char name[] = "", char *contents = "") {
+	Recipe(int ingredients = 0, const char name[] = "unknown", const char *contents = "unknown") {
 		this->ingredients = ingredients;
-		strcpy_s(this->name, 100, name);
+		strcpy(this->name, name);
 		this->contents = new char[strlen(contents) + 1];
-		strcpy_s(this->contents, strlen(contents), contents);
+		strcpy(this->contents, contents);
 	}
 	Recipe(const Recipe &r) {
 		cpy(r);
@@ -27,13 +27,12 @@ public:
 	void set_num_ing(int i) {
 		ingredients = i;
 	}
-	void set_name(char *name) {
-		strcpy_s(this->name, 100, name);
+	void set_name(const char *name) {
+		strcpy(this->name, name);
 	}
 	void set_contents(char *contents) {
-		delete[] contents;
 		this->contents = new char[strlen(contents) + 1];
-		strcpy_s(this->contents, 100, contents);
+		strcpy(this->contents, contents);
 	}
 	Recipe &operator=(const Recipe &r) {
 		if (this != &r) {
@@ -60,11 +59,10 @@ public:
 		++ingredients;
 		return r;
 	}
-	int getIngredients(){
+	int getIngredients() {
 		return ingredients;
 	}
-	~Recipe()
-	{
+	~Recipe() {
 		delete[] contents;
 	}
 };
@@ -75,7 +73,7 @@ private:
 	Recipe *recipes;
 	int num;
 	void cpy(const RecipesBook &rb) {
-		strcpy_s(name, 100, rb.name);
+		strcpy(name, rb.name);
 		num = rb.num;
 		recipes = new Recipe[rb.num + 1];
 		for (int i = 0; i < rb.num; ++i) {
@@ -83,8 +81,10 @@ private:
 		}
 	}
 public:
-	RecipesBook(char *name = "", Recipe *recipes = NULL, int num = 0) {
-		strcpy_s(this->name, 100, name);
+	RecipesBook(const char *name = "unknown") {
+		strcpy(this->name, name);
+		recipes = NULL;
+		num = 0;
 	}
 	RecipesBook(const RecipesBook &rb) {
 		cpy(rb);
@@ -113,7 +113,6 @@ public:
 			}
 			recipes[num] = r;
 			++num;
-			delete[] rp;
 		}
 		return *this;
 	}
@@ -126,11 +125,12 @@ public:
 	}
 
 	RecipesBook newBook(Recipe &r) {
-		RecipesBook nb = *this;
-		delete[] nb.recipes;
+		RecipesBook nb(name);
 		for (int i = 0; i < num; ++i) {
 			if (recipes[i].getIngredients() < r.getIngredients()) {
-				nb += (++recipes[i]);
+				Recipe rec = recipes[i];
+				++rec;
+				nb += rec;
 			}
 		}
 		return nb;
